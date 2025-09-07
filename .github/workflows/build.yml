@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: custom_fishing-plugin
-          path: Iris/build/*.jar  # 代码中 shadowJar 输出目录为 rootDir/target
+          path: build/*.jar  # 代码中 shadowJar 输出目录为 rootDir/target
