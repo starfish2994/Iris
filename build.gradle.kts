@@ -24,7 +24,7 @@ import kotlin.system.exitProcess
 
 buildscript {
     repositories.maven("https://jitpack.io")
-    dependencies.classpath("com.github.VolmitSoftware:NMSTools:c5cbc46ce6")
+    dependencies.classpath("com.github.VolmitSoftware:NMSTools:c88961416f")
 }
 
 plugins {
@@ -36,7 +36,7 @@ plugins {
 }
 
 group = "com.volmit"
-version = "3.7.2-1.20.1-1.21.8"
+version = "3.7.11-1.20.1-1.21.8"
 
 apply<ApiGenerator>()
 
@@ -62,10 +62,10 @@ val serverMinHeap = "2G"
 val serverMaxHeap = "8G"
 //Valid values are: none, truecolor, indexed256, indexed16, indexed8
 val color = "truecolor"
-val errorReporting = false
+val errorReporting = findProperty("errorReporting") as Boolean? ?: false
 
 val nmsBindings = mapOf(
-        "v1_21_R5" to "1.21.7-R0.1-SNAPSHOT",
+        "v1_21_R5" to "1.21.8-R0.1-SNAPSHOT",
         "v1_21_R4" to "1.21.5-R0.1-SNAPSHOT",
         "v1_21_R3" to "1.21.4-R0.1-SNAPSHOT",
         "v1_21_R2" to "1.21.3-R0.1-SNAPSHOT",
@@ -80,10 +80,6 @@ nmsBindings.forEach { key, value ->
     project(":nms:$key") {
         apply<JavaPlugin>()
         apply<NMSToolsPlugin>()
-
-        repositories {
-            maven("https://libraries.minecraft.net")
-        }
 
         extensions.configure(NMSToolsExtension::class) {
             jvm = jvmVersion.getOrDefault(key, 21)
